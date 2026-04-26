@@ -1,4 +1,4 @@
-# Data-analysis gotchas
+# Adaptive-data-analysis gotchas
 
 Use this reference when the input is messy, especially for Excel and schema cleanup.
 
@@ -8,6 +8,7 @@ Use this reference when the input is messy, especially for Excel and schema clea
 - Workbooks may contain title rows, notes, merged cells, subtotal rows, or blank spacer columns.
 - Formula cells may not reflect the values a user expects if the workbook was not recalculated before export.
 - A workbook can contain multiple candidate tables; do not assume the first non-empty sheet is the right one.
+- Summary, dashboard, and pivot-style tabs often look polished but are the wrong source for row-level analysis.
 
 ## CSV gotchas
 
@@ -25,4 +26,3 @@ Use this reference when the input is messy, especially for Excel and schema clea
 - A quick preview is not enough to justify a full in-memory load.
 - Schema normalization should be logged so the user can trace renamed or coerced columns.
 - If the data is ambiguous, prefer a conservative answer over a confident but lossy transformation.
-

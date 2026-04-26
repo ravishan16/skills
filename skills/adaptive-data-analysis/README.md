@@ -1,6 +1,6 @@
-# data-analysis
+# adaptive-data-analysis
 
-High-performance structured-data analysis for **CSV**, **Parquet**, and **Excel (`.xlsx`)** using a metadata-first workflow.
+High-performance structured-data analysis for **CSV**, **Parquet**, and **Excel (`.xlsx`)** using a metadata-first workflow that adapts to the shape of the data and the available headroom.
 
 ## What this skill is for
 
@@ -12,6 +12,14 @@ Use this skill when you want an agent to:
 - convert CSV or Excel to optimized Parquet
 - choose between in-memory, lazy, chunked, and out-of-core processing
 - produce a concise analysis report plus machine-friendly outputs
+
+## Install
+
+```bash
+npx skills add ravishan16/skills
+```
+
+This repository currently exposes **`adaptive-data-analysis`** as its only published skill.
 
 ## Supported inputs
 
@@ -52,12 +60,16 @@ Default Parquet write settings:
 6. **Use the right file type expectation**
    - If the source is already good Parquet, ask whether it should stay as-is before rewriting it.
 
-7. **Ask what the data cannot answer**
+7. **Be explicit with multi-sheet Excel workbooks**
+   - Example: “Inspect every workbook tab, tell me which one is the raw data tab, and explain why.”
+
+8. **Ask what the data cannot answer**
    - Example: “Tell me what business questions this file can answer and what still needs domain context.”
 
 ## Good prompt patterns
 
 - `Analyze orders.xlsx, pick the correct sheet, and summarize what this data means.`
+- `Analyze finance.xlsx, summarize the workbook tabs, choose the raw transaction tab, and tell me which tabs you ignored.`
 - `Convert events.csv to Parquet, profile null-heavy columns, and explain the chosen execution strategy.`
 - `Inspect warehouse/orders.parquet and tell me if it should be rewritten or queried directly.`
 - `Clean messy.xlsx, normalize headers, and write a cleaned Parquet plus a transformation record.`
@@ -67,6 +79,7 @@ Default Parquet write settings:
 - Prefer this skill for **structured local data**.
 - Do **not** use it for PDFs or image-based table extraction.
 - If the data is semantically ambiguous, the skill should infer carefully and say what needs confirmation.
+- For Excel workbooks, the skill should treat tab selection as part of the analysis, not as an incidental detail.
 
 ## Where to look next
 

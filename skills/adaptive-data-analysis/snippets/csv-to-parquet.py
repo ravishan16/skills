@@ -1,4 +1,4 @@
-"""Canonical CSV -> Parquet normalization snippet for the data-analysis skill."""
+"""Canonical CSV -> Parquet normalization snippet for the adaptive-data-analysis skill."""
 
 from pathlib import Path
 
@@ -20,4 +20,3 @@ lazy_frame = pl.scan_csv(input_path)
 )
 
 print(output_path)
-

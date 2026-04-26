@@ -13,8 +13,8 @@ def parser() -> argparse.ArgumentParser:
         description="Aggregate grading.json and timing.json files into benchmark.json.",
         epilog=(
             "Examples:\n"
-            "  python3 scripts/aggregate_eval_results.py --iteration-dir data-analysis-workspace/iteration-1\n"
-            "  python3 scripts/aggregate_eval_results.py --iteration-dir data-analysis-workspace/iteration-2 "
+            "  python3 scripts/aggregate_eval_results.py --iteration-dir adaptive-data-analysis-workspace/iteration-1\n"
+            "  python3 scripts/aggregate_eval_results.py --iteration-dir adaptive-data-analysis-workspace/iteration-2 "
             "--baseline-name old_skill"
         ),
         formatter_class=argparse.RawTextHelpFormatter,
@@ -89,4 +89,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-

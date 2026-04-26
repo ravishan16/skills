@@ -1,15 +1,16 @@
 ---
-name: data-analysis
+name: adaptive-data-analysis
 description: >
   Analyze structured local data files with a metadata-first, Parquet-first workflow.
   Use when the user wants to inspect, profile, clean, summarize, optimize, or convert
   CSV, Parquet, or Excel data. Prefer this skill when the dataset may require an
-  explicit choice between in-memory, lazy, chunked, or out-of-core execution.
+  explicit choice between in-memory, lazy, chunked, or out-of-core execution,
+  especially for multi-sheet workbooks or large row-oriented files.
 license: MIT
 compatibility: Requires Python 3.11+ for bundled scripts and local file access for CSV, Parquet, and XLSX files.
 metadata:
   author: Ravishankar Sivasubramaniam
-  version: "0.1.0"
+  version: "0.2.0"
 argument-hint: <file-or-directory> [analysis request]
 allowed-tools: Bash
 ---
@@ -87,6 +88,7 @@ allowed-tools: Bash
 - Mixed numeric/text columns should stay conservative rather than forcing lossy casts.
 - Formula-heavy spreadsheets may not behave like clean tabular exports.
 - Duplicate headers and ragged rows must be surfaced, not silently normalized away.
+- Multi-sheet workbooks often mix raw data tabs, summary tabs, and lookup tabs; do not assume the first non-empty sheet is the right analysis target.
 
 ## Available scripts
 
@@ -108,8 +110,12 @@ allowed-tools: Bash
 ### Excel input
 
 - Use `fastexcel` to inspect workbook metadata first.
-- Choose the relevant sheet before deeper processing.
+- Summarize candidate sheets before choosing one for deeper processing.
+- Prefer a raw, rectangular data tab over dashboard, chart, or summary tabs when the user asks for analysis.
+- If multiple tabs look relevant, explain the candidate choices and either select the strongest one or ask for confirmation when ambiguity is material.
 - Normalize the selected sheet to Parquet once and avoid repeated workbook reads.
+- Only combine or join sheets when schemas align, a clear join key exists, or the user explicitly asks for cross-sheet analysis.
+- Report which sheets were used, which were ignored, and why.
 - Surface workbook limitations explicitly when formulas, merged cells, or irregular layouts affect reliability.
 
 ### Fallback behavior
@@ -142,9 +148,10 @@ Each run should produce or report:
    - optional schema report
    - optional profiling summary
 6. **Transformation record**
-   - renamed columns
-   - coercions
-   - dropped rows or skipped sheets
+    - renamed columns
+    - coercions
+    - dropped rows or skipped sheets
+    - selected and ignored workbook tabs, when applicable
 7. **Failure surface**
    - explicit unsupported-format or parse-error reporting
 
@@ -170,14 +177,15 @@ Each run should produce or report:
    - lazy
    - chunked conversion
    - DuckDB out-of-core SQL
-4. Normalize to Parquet when the input is CSV or Excel and the task is more than a quick preview.
-5. Run analysis with Polars or DuckDB based on the requested work.
-6. Add a semantic interpretation layer:
+4. For Excel, inspect all visible candidate sheets, summarize their likely role, and choose the primary analysis tab explicitly.
+5. Normalize to Parquet when the input is CSV or Excel and the task is more than a quick preview.
+6. Run analysis with Polars or DuckDB based on the requested work.
+7. Add a semantic interpretation layer:
    - what the dataset appears to represent
    - what important fields likely mean
    - what questions are answerable from the available columns
    - what requires user confirmation
-7. Report the strategy, findings, semantic interpretation, and any written artifacts.
+8. Report the strategy, findings, semantic interpretation, and any written artifacts.
 
 When needed, load supporting material selectively:
 
@@ -185,6 +193,7 @@ When needed, load supporting material selectively:
 - Read `references/schema-normalization.md` when cleaning or reconciling columns.
 - Read `references/semantic-interpretation.md` when summarizing what the data likely means.
 - Read `references/eval-matrix.md` when adding or checking eval coverage.
+- Read `references/workbook-selection.md` when the input workbook has multiple candidate tabs.
 - Use `assets/report-template.md` when the user wants a written analysis report.
 - Use `snippets/metadata-pass.md` when inspecting files before choosing a strategy.
 - Use `snippets/csv-to-parquet.py` or `snippets/excel-to-parquet.py` when normalizing row-oriented inputs.

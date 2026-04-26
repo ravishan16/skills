@@ -18,7 +18,7 @@
 ## Case 4: Multi-sheet Excel
 
 - Prompt: Analyze `finance.xlsx` and use the sheet that contains the transaction table.
-- Expectation: workbook metadata inspection and explicit sheet-selection rationale.
+- Expectation: workbook metadata inspection, explicit sheet-selection rationale, and a note about ignored summary or lookup tabs.
 
 ## Case 5: Dirty schema
 
@@ -30,3 +30,7 @@
 - Prompt: Profile `huge.csv` on a constrained machine and avoid memory-heavy failures.
 - Expectation: out-of-core or chunked path with an explanation of the tradeoff.
 
+## Case 7: Workbook tab classification
+
+- Prompt: Inspect `ops.xlsx`, summarize the workbook tabs, and tell me which tab looks like raw data versus summaries or lookups.
+- Expectation: tab classification, primary-tab recommendation, and clear ambiguity reporting when multiple tabs look plausible.

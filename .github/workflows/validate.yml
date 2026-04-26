@@ -24,6 +24,5 @@ jobs:
           python3 scripts/prepare_eval_workspace.py --help >/dev/null
           python3 scripts/aggregate_eval_results.py --help >/dev/null
           python3 scripts/package_skills.py --help >/dev/null
-          python3 skills/data-analysis/scripts/inspect_dataset.py --help >/dev/null
-          python3 skills/data-analysis/scripts/render_report.py --help >/dev/null
-
+          python3 skills/adaptive-data-analysis/scripts/inspect_dataset.py --help >/dev/null
+          python3 skills/adaptive-data-analysis/scripts/render_report.py --help >/dev/null

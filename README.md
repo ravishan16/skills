@@ -2,7 +2,7 @@
 
 Open-source, contributor-friendly **agent skills** focused on structured data workflows.
 
-The first skill in this repo is **`data-analysis`**: a metadata-first, Parquet-first skill for **CSV**, **Parquet**, and **Excel (`.xlsx`)** that prefers **PyArrow + Polars + DuckDB** over Pandas-heavy workflows.
+The first skill in this repo is **`adaptive-data-analysis`**: a metadata-first, Parquet-first skill for **CSV**, **Parquet**, and **Excel (`.xlsx`)** that prefers **PyArrow + Polars + DuckDB** over Pandas-heavy workflows and adapts its execution strategy to the data shape and environment.
 
 **Author:** Ravishankar Sivasubramaniam
 
@@ -24,14 +24,14 @@ The first skill in this repo is **`data-analysis`**: a metadata-first, Parquet-f
 ├── scripts/
 └── skills/
     ├── _template/
-    └── data-analysis/
+    └── adaptive-data-analysis/
 ```
 
 ## Current skills
 
 | Skill | Status | Focus |
 | --- | --- | --- |
-| `data-analysis` | Drafting | High-performance analysis for CSV, Parquet, and Excel |
+| `adaptive-data-analysis` | Drafting | High-performance, metadata-driven analysis for CSV, Parquet, and Excel |
 
 The `_template` directory is a local scaffold and is **not** intended to be installed as a skill.
 
@@ -48,8 +48,8 @@ Run the repo checks locally:
 Prepare an eval workspace or aggregate benchmark results:
 
 ```bash
-python3 scripts/prepare_eval_workspace.py --skill-dir skills/data-analysis
-python3 scripts/aggregate_eval_results.py --iteration-dir data-analysis-workspace/iteration-1
+python3 scripts/prepare_eval_workspace.py --skill-dir skills/adaptive-data-analysis
+python3 scripts/aggregate_eval_results.py --iteration-dir adaptive-data-analysis-workspace/iteration-1
 ```
 
 Package skills for release or marketplace smoke testing:
@@ -75,9 +75,11 @@ skills.sh does not require a separate publish API. Public GitHub repositories th
 npx skills add ravishan16/skills
 ```
 
+This repository currently publishes **one installable skill**, so adding `ravishan16/skills` installs **`adaptive-data-analysis`**.
+
 ## Roadmap
 
-- Finish the first release of `data-analysis`
+- Finish the first release of `adaptive-data-analysis`
 - Add evals and benchmark baselines
 - Add publish-ready metadata and workflow checks
 - Refine skills with real-task feedback and richer gotchas/reference material

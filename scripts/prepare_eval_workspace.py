@@ -13,9 +13,9 @@ def parser() -> argparse.ArgumentParser:
         description="Prepare a structured eval workspace from evals/evals.json.",
         epilog=(
             "Examples:\n"
-            "  python3 scripts/prepare_eval_workspace.py --skill-dir skills/data-analysis\n"
-            "  python3 scripts/prepare_eval_workspace.py --skill-dir skills/data-analysis "
-            "--workspace-root data-analysis-workspace --iteration iteration-2"
+            "  python3 scripts/prepare_eval_workspace.py --skill-dir skills/adaptive-data-analysis\n"
+            "  python3 scripts/prepare_eval_workspace.py --skill-dir skills/adaptive-data-analysis "
+            "--workspace-root adaptive-data-analysis-workspace --iteration iteration-2"
         ),
         formatter_class=argparse.RawTextHelpFormatter,
     )
@@ -110,4 +110,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-

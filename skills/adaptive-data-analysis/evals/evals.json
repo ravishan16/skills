@@ -1,5 +1,5 @@
 {
-  "skill_name": "data-analysis",
+  "skill_name": "adaptive-data-analysis",
   "evals": [
     {
       "id": "small-csv-summary",
@@ -38,7 +38,18 @@
       "assertions": [
         "The output states that workbook or sheet metadata must be inspected first.",
         "The output gives a rationale for sheet selection.",
-        "The output surfaces any ambiguity rather than pretending the sheet choice is obvious."
+        "The output surfaces any ambiguity rather than pretending the sheet choice is obvious.",
+        "The output distinguishes the selected analysis tab from ignored or summary tabs."
+      ]
+    },
+    {
+      "id": "workbook-tab-classification",
+      "prompt": "Inspect `ops.xlsx`, summarize the workbook tabs, and tell me which tab looks like raw data versus summaries or lookups.",
+      "expected_output": "A tab-aware workbook summary that classifies sheet roles, names the strongest primary analysis tab, and explains any unresolved ambiguity.",
+      "assertions": [
+        "The output summarizes multiple workbook tabs rather than jumping straight into one sheet.",
+        "The output identifies likely raw data, summary, or lookup roles.",
+        "The output names a preferred analysis tab with a reason."
       ]
     },
     {
@@ -63,4 +74,3 @@
     }
   ]
 }
-

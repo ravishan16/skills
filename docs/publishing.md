@@ -17,6 +17,8 @@ Install command for this repository:
 npx skills add ravishan16/skills
 ```
 
+Because this repository currently exposes one published skill, that install path resolves to **`adaptive-data-analysis`**.
+
 ## Required
 
 - `SKILL.md` has complete frontmatter
@@ -44,4 +46,4 @@ npx skills add ravishan16/skills
 
 ## For this repository
 
-The first release should prioritize a strong, clearly scoped `data-analysis` skill over a broad catalog of partially defined skills.
+The first release should prioritize a strong, clearly scoped `adaptive-data-analysis` skill over a broad catalog of partially defined skills.

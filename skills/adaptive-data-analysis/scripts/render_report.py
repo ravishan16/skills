@@ -13,7 +13,7 @@ from pathlib import Path
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
-        description="Render a Markdown data-analysis report from a JSON payload.",
+        description="Render a Markdown adaptive-data-analysis report from a JSON payload.",
         epilog=(
             "Examples:\n"
             "  python3 scripts/render_report.py --input-json report.json\n"
@@ -120,4 +120,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-

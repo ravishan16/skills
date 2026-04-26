@@ -14,7 +14,7 @@ if [[ ! -f "$CSV_FILE" ]]; then
 fi
 
 cat <<EOF
-Benchmark scaffold for data-analysis
+Benchmark scaffold for adaptive-data-analysis
 
 Input: $CSV_FILE
 

@@ -32,4 +32,4 @@ If multiple files or sheets are combined:
 - describe which schema was treated as canonical
 - document any widening or unioning of types
 - surface conflicts instead of silently hiding them
-
+- only combine workbook tabs when there is a strong structural reason to do so

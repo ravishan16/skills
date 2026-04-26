@@ -14,7 +14,7 @@ Use `evals/evals.json` as the source of truth for structured test cases.
 ## Suggested workspace layout
 
 ```text
-data-analysis-workspace/
+adaptive-data-analysis-workspace/
 └── iteration-1/
     ├── eval-small-csv-summary/
     │   ├── with_skill/
@@ -22,5 +22,4 @@ data-analysis-workspace/
     └── benchmark.json
 ```
 
-The current repository only validates the presence and shape of `evals/evals.json`; it does not yet automate full eval execution.
-
+The current repository validates the presence and shape of `evals/evals.json` and provides workspace/benchmark helpers, but it does not yet fully automate agent execution and grading.

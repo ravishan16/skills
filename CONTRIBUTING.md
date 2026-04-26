@@ -66,7 +66,7 @@ Use `skills/_template/` as the starting point, then rename `TEMPLATE.md` to `SKI
 - Each eval should include a realistic `prompt`, an `expected_output`, and assertions once the first run has shown what success looks like.
 - When useful, keep supporting notes or human-readable summaries alongside `evals/evals.json`, not instead of it.
 
-### Data-analysis repo expectations
+### Adaptive-data-analysis repo expectations
 
 For structured-data skills, contributors should:
 

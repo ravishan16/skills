@@ -10,12 +10,14 @@ Use this reference when adding evals or checking whether the skill still reflect
 4. multi-sheet Excel workbook where the correct sheet must be selected
 5. dirty Excel headers that require schema normalization
 6. low-memory scenario that should force chunked or out-of-core execution
+7. workbook with both raw-data tabs and summary tabs that must be distinguished
 
 ## Assertions to check
 
 - the skill explains **why** it chose the execution strategy
 - Parquet is not rewritten without a reason
 - Excel sheet selection is justified
+- ignored or summary workbook tabs are reported explicitly
 - schema cleanup is recorded in the transformation output
 - ambiguous data is surfaced explicitly instead of hidden
 - the report distinguishes observed structure from inferred business meaning
