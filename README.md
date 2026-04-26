@@ -77,6 +77,41 @@ npx skills add ravishan16/skills
 
 This repository currently publishes **one installable skill**, so adding `ravishan16/skills` installs **`adaptive-data-analysis`**.
 
+### Install walkthrough
+
+The CLI flow below shows the expected experience when adding this repository as a skills source.
+
+<table>
+  <tr>
+    <td width="50%" valign="top">
+      <strong>1. Add the repository source</strong><br />
+      Start by adding <code>ravishan16/skills</code> as a skills source from the CLI.
+      <br /><br />
+      <img src="assets/install-step1.png" alt="CLI prompt showing the skills source being added from ravishan16/skills." />
+    </td>
+    <td width="50%" valign="top">
+      <strong>2. Review discovered skills</strong><br />
+      The installer detects the published skill and shows the installable entry before selection.
+      <br /><br />
+      <img src="assets/install-step2.png" alt="CLI output showing adaptive-data-analysis discovered as the installable skill." />
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" valign="top">
+      <strong>3. Choose target agents</strong><br />
+      Select the agent directories where the skill should be installed.
+      <br /><br />
+      <img src="assets/install-step3.png" alt="CLI selection screen for choosing which agents receive the installed skill." />
+    </td>
+    <td width="50%" valign="top">
+      <strong>4. Confirm the installed skill</strong><br />
+      After installation, the CLI reports the completed setup for the selected agent environments.
+      <br /><br />
+      <img src="assets/install-step4.png" alt="CLI output confirming successful installation of the adaptive-data-analysis skill." />
+    </td>
+  </tr>
+</table>
+
 ## Roadmap
 
 - Finish the first release of `adaptive-data-analysis`
