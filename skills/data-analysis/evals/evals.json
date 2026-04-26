@@ -1,0 +1,66 @@
+{
+  "skill_name": "data-analysis",
+  "evals": [
+    {
+      "id": "small-csv-summary",
+      "prompt": "Analyze `sales.csv` and summarize the top categories.",
+      "expected_output": "A concise analysis that explains the chosen in-memory or lazy strategy, summarizes the dataset, and identifies the top categories.",
+      "assertions": [
+        "The output explains why the chosen execution strategy fits the file.",
+        "The output summarizes what the dataset appears to represent.",
+        "The output names at least one question the data can answer."
+      ]
+    },
+    {
+      "id": "large-csv-normalization",
+      "prompt": "Convert `events.csv` to Parquet and profile null-heavy columns.",
+      "expected_output": "A Parquet-first plan or execution path that justifies chunked or staged processing and highlights null-heavy columns.",
+      "assertions": [
+        "The output prefers Parquet normalization before deep analysis.",
+        "The output explains why an in-memory eager path would be risky or unnecessary.",
+        "The output identifies the requested profiling focus."
+      ]
+    },
+    {
+      "id": "existing-parquet-scan",
+      "prompt": "Inspect `warehouse/orders.parquet` and tell me whether it should be rewritten.",
+      "expected_output": "A direct Parquet scan recommendation that avoids rewriting unless a concrete benefit is identified.",
+      "assertions": [
+        "The output avoids recommending a rewrite without a specific reason.",
+        "The output identifies likely analysis questions supported by the schema.",
+        "The output distinguishes observed structure from inferred meaning."
+      ]
+    },
+    {
+      "id": "multi-sheet-excel",
+      "prompt": "Analyze `finance.xlsx` and use the sheet that contains the transaction table.",
+      "expected_output": "A workbook-aware analysis that inspects sheet metadata, justifies the selected sheet, and explains the likely grain of the data.",
+      "assertions": [
+        "The output states that workbook or sheet metadata must be inspected first.",
+        "The output gives a rationale for sheet selection.",
+        "The output surfaces any ambiguity rather than pretending the sheet choice is obvious."
+      ]
+    },
+    {
+      "id": "dirty-schema-cleanup",
+      "prompt": "Clean `messy.xlsx`, normalize headers, and write a cleaned Parquet file.",
+      "expected_output": "A cleanup-oriented response that describes normalization steps, output artifacts, and a transformation record.",
+      "assertions": [
+        "The output mentions deterministic schema normalization.",
+        "The output includes a transformation record or equivalent log of changes.",
+        "The output uses predictable artifact naming."
+      ]
+    },
+    {
+      "id": "low-memory-profile",
+      "prompt": "Profile `huge.csv` on a constrained machine and avoid memory-heavy failures.",
+      "expected_output": "A cautious out-of-core or chunked strategy with clear tradeoff explanation and no eager-load recommendation.",
+      "assertions": [
+        "The output avoids an eager in-memory recommendation.",
+        "The output explains the chosen low-memory strategy.",
+        "The output states at least one question the data cannot answer yet without more context."
+      ]
+    }
+  ]
+}
+

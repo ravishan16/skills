@@ -1,0 +1,29 @@
+name: Validate
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Make scripts executable
+        run: chmod +x scripts/*.sh
+      - name: Validate skill structure
+        run: ./scripts/validate_skill.sh
+      - name: Lint docs
+        run: ./scripts/lint_docs.sh
+      - name: Check eval layout
+        run: ./scripts/run_evals.sh
+      - name: Check script interfaces
+        run: |
+          python3 scripts/prepare_eval_workspace.py --help >/dev/null
+          python3 scripts/aggregate_eval_results.py --help >/dev/null
+          python3 scripts/package_skills.py --help >/dev/null
+          python3 skills/data-analysis/scripts/inspect_dataset.py --help >/dev/null
+          python3 skills/data-analysis/scripts/render_report.py --help >/dev/null
+

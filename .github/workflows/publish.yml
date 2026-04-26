@@ -1,0 +1,57 @@
+name: Publish skills
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+  release:
+    types:
+      - published
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Make scripts executable
+        run: chmod +x scripts/*.sh
+      - name: Validate repository
+        run: |
+          ./scripts/validate_skill.sh
+          ./scripts/lint_docs.sh
+          ./scripts/run_evals.sh
+      - name: Check script interfaces
+        run: |
+          python3 scripts/prepare_eval_workspace.py --help >/dev/null
+          python3 scripts/aggregate_eval_results.py --help >/dev/null
+          python3 scripts/package_skills.py --help >/dev/null
+          python3 skills/data-analysis/scripts/inspect_dataset.py --help >/dev/null
+          python3 skills/data-analysis/scripts/render_report.py --help >/dev/null
+      - name: Package skills
+        run: python3 scripts/package_skills.py --output-dir dist
+      - name: Upload packaged skills
+        uses: actions/upload-artifact@v4
+        with:
+          name: packaged-skills
+          path: dist/
+      - name: Attach packages to GitHub release
+        if: github.event_name == 'release'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh release upload "${{ github.event.release.tag_name }}" dist/* --clobber
+      - name: Publish summary
+        run: |
+          {
+            echo "## skills.sh publish summary"
+            echo
+            echo "skills.sh uses public GitHub repositories as the install source."
+            echo
+            echo "- Author: Ravishankar Sivasubramaniam"
+            echo "- Install command: \`npx skills add ravishan16/skills\`"
+            echo "- Packaged artifacts: \`dist/\`"
+          } >> "$GITHUB_STEP_SUMMARY"
+
