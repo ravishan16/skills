@@ -64,3 +64,4 @@ allowed-tools: Bash
 - Put reusable code or command fragments in `snippets/`.
 - Put executable helpers with stable interfaces in `scripts/`.
 - Tell the agent when to load each reference or template.
+

@@ -29,29 +29,28 @@ while IFS= read -r -d '' skill_dir; do
   grep -q '^description:' "$skill_file" || { echo "Missing description in $skill_file" >&2; exit 1; }
   grep -q '^allowed-tools:' "$skill_file" || { echo "Missing allowed-tools in $skill_file" >&2; exit 1; }
 
-  if [[ "$skill_name" != "_template" ]]; then
-    declared_name="$(sed -n 's/^name:[[:space:]]*//p' "$skill_file" | head -1)"
-    [[ "$declared_name" == "$skill_name" ]] || {
-      echo "Skill name mismatch: folder '$skill_name' vs frontmatter '$declared_name'" >&2
-      exit 1
-    }
-  fi
+  declared_name="$(sed -n 's/^name:[[:space:]]*//p' "$skill_file" | head -1)"
+  [[ "$declared_name" == "$skill_name" ]] || {
+    echo "Skill name mismatch: folder '$skill_name' vs frontmatter '$declared_name'" >&2
+    exit 1
+  }
 
   for subdir in examples evals assets references snippets scripts; do
     [[ -d "$skill_dir/$subdir" ]] || { echo "Missing $subdir directory in $skill_dir" >&2; exit 1; }
   done
 
-  if [[ "$skill_name" != "_template" ]]; then
-    grep -q '^license:' "$skill_file" || { echo "Missing license in $skill_file" >&2; exit 1; }
-    grep -q '^compatibility:' "$skill_file" || { echo "Missing compatibility in $skill_file" >&2; exit 1; }
-    grep -q '^metadata:' "$skill_file" || { echo "Missing metadata block in $skill_file" >&2; exit 1; }
-    grep -q '^[[:space:]]*author:[[:space:]]*Ravishankar Sivasubramaniam' "$skill_file" || {
-      echo "Missing required author metadata in $skill_file" >&2
-      exit 1
-    }
-  fi
-done < <(find skills -mindepth 1 -maxdepth 1 -type d -print0 | sort -z)
+  grep -q '^license:' "$skill_file" || { echo "Missing license in $skill_file" >&2; exit 1; }
+  grep -q '^compatibility:' "$skill_file" || { echo "Missing compatibility in $skill_file" >&2; exit 1; }
+  grep -q '^metadata:' "$skill_file" || { echo "Missing metadata block in $skill_file" >&2; exit 1; }
+  grep -q '^[[:space:]]*author:[[:space:]]*Ravishankar Sivasubramaniam' "$skill_file" || {
+    echo "Missing required author metadata in $skill_file" >&2
+    exit 1
+  }
+done < <(find skills -mindepth 1 -maxdepth 1 -type d -exec test -f '{}/SKILL.md' ';' -print0 | sort -z)
 
 [[ "$found_skill" -eq 1 ]] || { echo "No skills found" >&2; exit 1; }
+
+[[ -f skills/_template/TEMPLATE.md ]] || { echo "Missing template scaffold file: skills/_template/TEMPLATE.md" >&2; exit 1; }
+[[ -f skills/_template/README.md ]] || { echo "Missing template README: skills/_template/README.md" >&2; exit 1; }
 
 echo "Skill structure is valid."

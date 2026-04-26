@@ -33,6 +33,8 @@ The first skill in this repo is **`data-analysis`**: a metadata-first, Parquet-f
 | --- | --- | --- |
 | `data-analysis` | Drafting | High-performance analysis for CSV, Parquet, and Excel |
 
+The `_template` directory is a local scaffold and is **not** intended to be installed as a skill.
+
 ## Development
 
 Run the repo checks locally:

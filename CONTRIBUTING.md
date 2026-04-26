@@ -25,7 +25,7 @@ The best skills usually come from **real execution**, not generic brainstorming 
 
 ### Skill layout
 
-Every skill should live under `skills/<skill-name>/` and include:
+Every published skill should live under `skills/<skill-name>/` and include:
 
 ```text
 skills/<skill-name>/
@@ -38,7 +38,7 @@ skills/<skill-name>/
 └── scripts/
 ```
 
-Use `skills/_template/` as the starting point.
+Use `skills/_template/` as the starting point, then rename `TEMPLATE.md` to `SKILL.md`.
 
 ### Naming
 
