@@ -17,7 +17,7 @@ Install command for this repository:
 npx skills add ravishan16/skills
 ```
 
-Because this repository currently exposes one published skill, that install path resolves to **`adaptive-data-analysis`**.
+Because this repository currently exposes two published skills, that install path resolves to **`adaptive-data-analysis`** and **`lean-data-platform`**.
 
 ## Required
 
@@ -46,4 +46,4 @@ Because this repository currently exposes one published skill, that install path
 
 ## For this repository
 
-The first release should prioritize a strong, clearly scoped `adaptive-data-analysis` skill over a broad catalog of partially defined skills.
+Published skills should stay clearly scoped and installable. In this repository, `adaptive-data-analysis` covers structured local data execution, while `lean-data-platform` covers lean analytics platform architecture.

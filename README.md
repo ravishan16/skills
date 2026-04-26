@@ -1,8 +1,11 @@
 # skills
 
-Open-source, contributor-friendly **agent skills** focused on structured data workflows.
+Open-source, contributor-friendly **agent skills** focused on structured data workflows and lean analytics platform design.
 
-The first skill in this repo is **`adaptive-data-analysis`**: a metadata-first, Parquet-first skill for **CSV**, **Parquet**, and **Excel (`.xlsx`)** that prefers **PyArrow + Polars + DuckDB** over Pandas-heavy workflows and adapts its execution strategy to the data shape and environment.
+The current catalog centers on:
+
+- **`adaptive-data-analysis`**: a metadata-first, Parquet-first skill for **CSV**, **Parquet**, and **Excel (`.xlsx`)** that prefers **PyArrow + Polars + DuckDB** over Pandas-heavy workflows and adapts its execution strategy to the data shape and environment.
+- **`lean-data-platform`**: a blueprint-oriented skill for building a lean, cost-optimized analytics SaaS on **Cloudflare R2 + Iceberg + Workers + Pages** with **Supabase Auth** and a staged path to larger runtimes.
 
 **Author:** Ravishankar Sivasubramaniam
 
@@ -24,7 +27,8 @@ The first skill in this repo is **`adaptive-data-analysis`**: a metadata-first, 
 ├── scripts/
 └── skills/
     ├── _template/
-    └── adaptive-data-analysis/
+    ├── adaptive-data-analysis/
+    └── lean-data-platform/
 ```
 
 ## Current skills
@@ -32,6 +36,7 @@ The first skill in this repo is **`adaptive-data-analysis`**: a metadata-first, 
 | Skill | Status | Focus |
 | --- | --- | --- |
 | `adaptive-data-analysis` | Drafting | High-performance, metadata-driven analysis for CSV, Parquet, and Excel |
+| `lean-data-platform` | Drafting | Lean, multi-tenant analytics platform architecture on Cloudflare with open table formats |
 
 The `_template` directory is a local scaffold and is **not** intended to be installed as a skill.
 
@@ -75,7 +80,7 @@ skills.sh does not require a separate publish API. Public GitHub repositories th
 npx skills add ravishan16/skills
 ```
 
-This repository currently publishes **one installable skill**, so adding `ravishan16/skills` installs **`adaptive-data-analysis`**.
+This repository currently publishes **two installable skills**, so adding `ravishan16/skills` installs **`adaptive-data-analysis`** and **`lean-data-platform`**.
 
 ### Install walkthrough
 
@@ -115,6 +120,7 @@ The CLI flow below shows the expected experience when adding this repository as 
 ## Roadmap
 
 - Finish the first release of `adaptive-data-analysis`
+- Refine `lean-data-platform` with implementation feedback and deployment examples
 - Add evals and benchmark baselines
 - Add publish-ready metadata and workflow checks
 - Refine skills with real-task feedback and richer gotchas/reference material

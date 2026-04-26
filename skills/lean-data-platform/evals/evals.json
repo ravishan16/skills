@@ -1,0 +1,116 @@
+{
+  "skill_name": "lean-data-platform",
+  "evals": [
+    {
+      "id": "bootstrap-small-platform",
+      "prompt": "Design a small multi-tenant analytics SaaS on Cloudflare with R2, Iceberg, Workers, Pages, and Supabase Auth.",
+      "expected_output": "A lean default architecture that explains the storage, catalog, auth, and reporting roles without introducing unnecessary always-on services.",
+      "assertions": [
+        "The output chooses a scale-to-zero default architecture.",
+        "The output identifies R2, Iceberg, Workers, Pages, and Supabase Auth as distinct layers with distinct roles.",
+        "The output avoids introducing a dedicated metadata or app server as the default."
+      ]
+    },
+    {
+      "id": "tenant-isolation-plan",
+      "prompt": "How should I isolate tenants in an R2 + Iceberg analytics platform while keeping costs low?",
+      "expected_output": "A multi-tenant design that uses namespaces or prefixes, JWT-derived tenant context, and trusted enforcement instead of browser-only checks.",
+      "assertions": [
+        "The output describes logical tenant separation in storage or table layout.",
+        "The output requires tenant enforcement in a trusted Worker or equivalent layer.",
+        "The output warns against relying only on frontend filtering."
+      ]
+    },
+    {
+      "id": "evidence-spa-reporting",
+      "prompt": "Use Evidence.dev SPA mode for live reports on top of my Cloudflare data stack.",
+      "expected_output": "A reporting design that distinguishes governed storage from browser-facing read surfaces and explains DuckDB-Wasm-friendly Parquet access.",
+      "assertions": [
+        "The output explains that browser-facing reports should read an explicitly exposed Parquet surface.",
+        "The output keeps Iceberg as the governed storage contract or system of record.",
+        "The output explains why this separation matters for security or operability."
+      ]
+    },
+    {
+      "id": "white-label-domains",
+      "prompt": "I need custom customer domains and per-tenant branding for the reporting portal.",
+      "expected_output": "A Cloudflare for SaaS plus Worker-based design that routes by hostname and applies tenant-specific branding.",
+      "assertions": [
+        "The output uses Cloudflare for SaaS for custom domains.",
+        "The output describes hostname-to-tenant lookup in KV or an equivalent lightweight control plane.",
+        "The output includes edge-driven branding injection or equivalent per-tenant theming."
+      ]
+    },
+    {
+      "id": "future-runtime-upgrade",
+      "prompt": "When should this lean Cloudflare analytics stack move to MotherDuck or BigQuery?",
+      "expected_output": "A staged answer that preserves the small-platform default while naming the workload signals that justify a larger runtime.",
+      "assertions": [
+        "The output does not replace the lean stack as the day-one default.",
+        "The output names concrete upgrade triggers such as concurrency, join complexity, freshness, or governance.",
+        "The output preserves Parquet or Iceberg as the portability layer."
+      ]
+    },
+    {
+      "id": "zero-copy-ingestion",
+      "prompt": "Show me the ingestion path from Excel uploads into the analytics lakehouse.",
+      "expected_output": "A composable ingestion workflow that moves spreadsheet data through Arrow-compatible tooling into Parquet and registers it in Iceberg.",
+      "assertions": [
+        "The output uses Polars or Arrow-friendly tooling for ingestion.",
+        "The output writes Parquet with stable defaults before or while registering governed tables.",
+        "The output includes Iceberg registration and mentions report-safe downstream use.",
+        "The output names an external VM or instance as the default write plane unless the user specifies another ingestion runtime."
+      ]
+    },
+    {
+      "id": "shared-table-leak-risk",
+      "prompt": "We can just put tenant_id in a shared table and let the frontend filter rows for each customer, right?",
+      "expected_output": "A corrective answer that rejects frontend-only enforcement and requires a trusted enforcement layer for shared-table tenancy.",
+      "assertions": [
+        "The output rejects frontend-only tenant filtering as insufficient.",
+        "The output requires a trusted enforcement layer such as Workers or a backend API.",
+        "The output treats missing tenant predicates as a security problem."
+      ]
+    },
+    {
+      "id": "report-exposure-model",
+      "prompt": "My Evidence.dev app should read the same Iceberg-backed data directly from the browser. How should that work?",
+      "expected_output": "A bounded design that distinguishes governed Iceberg storage from the browser-facing read surface and names a concrete exposure pattern.",
+      "assertions": [
+        "The output does not treat arbitrary browser access to governed tables as the default.",
+        "The output names a concrete exposure pattern such as signed URLs, Worker-mediated APIs, or curated report artifacts.",
+        "The output explains which data should remain non-browser-accessible."
+      ]
+    },
+    {
+      "id": "tenant-lifecycle-gap",
+      "prompt": "Design the tenant onboarding and offboarding flow for this white-labeled analytics platform.",
+      "expected_output": "A control-plane-oriented answer that covers tenant creation, hostname and branding registration, suspension, and deletion behavior.",
+      "assertions": [
+        "The output includes tenant provisioning steps.",
+        "The output includes custom-domain or branding registration behavior.",
+        "The output includes suspension, offboarding, or deletion behavior."
+      ]
+    },
+    {
+      "id": "observability-and-maintenance",
+      "prompt": "What operations and maintenance guidance does this lean data platform need before it is production-ready?",
+      "expected_output": "An answer that adds observability, auditability, and Iceberg maintenance instead of stopping at component selection.",
+      "assertions": [
+        "The output includes tenant-aware logging or audit events.",
+        "The output includes Iceberg maintenance such as retention or compaction.",
+        "The output says the platform is incomplete without these operational controls."
+      ]
+    },
+    {
+      "id": "browser-scale-boundary",
+      "prompt": "We expect lots of concurrent heavy ad hoc queries in the browser. Should we still keep the lean Cloudflare architecture as-is?",
+      "expected_output": "A pragmatic answer that preserves the lean default for the right workloads but recommends a larger runtime when the workload already exceeds browser- and edge-friendly limits.",
+      "assertions": [
+        "The output says the workload strains the default browser-delivered model.",
+        "The output recommends a larger runtime such as MotherDuck or BigQuery for that workload shape.",
+        "The output preserves Parquet or Iceberg as the portability layer."
+      ]
+    }
+  ]
+}
